@@ -1,0 +1,19 @@
+﻿@model IEnumerable<GroupAssignment1.Models.Housing>
+
+<!DOCTYPE html>
+
+<div class="container">
+    <h1>@ViewBag.CurrentViewName</h1>
+    <table class="table table-striped">
+        <tr><th>Id</th><th>Name</th><th>Rent</th><th>Description</th></tr>
+        @foreach (var housing in Model)
+        {
+            <tr>
+                <td>@housing.HousingId</td>
+                <td>@housing.Name</td>
+                <td>@housing.Rent.ToString("0.00 NOK")</td>
+                <td></td>
+            </tr>
+        }
+    </table>
+</div>

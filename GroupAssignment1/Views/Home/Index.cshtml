@@ -2,7 +2,39 @@
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+<!DOCTYPE html>
+<html>
+
+    <head>
+        <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+        <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
+        <script src="~/lib/jquery/jquery.js"></script>
+        <style>
+            .jumbotron {
+                background-image: url(../../images/home1.jpg);
+                background-size: cover;
+                    
+                background-position: bottom;
+                color: #fff;
+                height: 200% !important;
+                width: 100% !important;
+            }
+
+            .mb-3 {
+                margin-bottom: 0!important;            
+            }
+        
+        </style>
+    </head>
+
+    <body>
+        <div class="jumbotron text-center">
+            <h1>Welcome to ***BNB</h1>
+            <p>Find your home for now or for later.</p>
+            <p>
+                <a class="btn btn-primary btn-lg" href="Login" role="button">Get started</a>
+            </p>
+        </div>
+    </body>
+</html>
+
