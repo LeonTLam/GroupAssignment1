@@ -1,7 +1,31 @@
 ﻿@model HousingListViewModel
 
 <!DOCTYPE html>
-<h1>List of Houses/Apartments (@Model.CurrentViewName View)</h1>
+
+<style>
+    a {
+        color: hotpink;
+    }
+
+    a:hover {
+        color: royalblue;
+    }
+
+    a:link {
+        text-decoration: none;
+    }
+
+    img {
+        opacity: 0.5;
+    }
+
+    img:hover {
+        opacity: 1.0;
+    }
+
+</style>
+
+<h1>List of homes for rent (@Model.CurrentViewName View)</h1>
 <a href="/Housing/Table">Table View</a>
 <div class="container">
     <div class="row row-cols-1 row-cols-md-3 g-4">

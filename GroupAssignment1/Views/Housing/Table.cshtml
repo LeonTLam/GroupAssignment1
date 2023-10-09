@@ -2,11 +2,45 @@
 
 <!DOCTYPE html>
 
+<style>
+    a {
+        color: hotpink;
+    }
+
+    a:hover {
+        color: royalblue;
+    }
+
+    a:link {
+        text-decoration: none;
+    }
+
+    table {
+        border-collapse: collapse;
+        width: 100%;
+    }
+
+    th, td {
+        padding: 8px;
+        text-align: left;
+        border-bottom: 1px solid #ddd;
+    }
+
+    tr:hover {
+        background-color: #e8f4f8;
+    }
+</style>
+
 <h1>List of homes for rent (@Model.CurrentViewName View)</h1>
 <a href="/Housing/Grid">Grid View</a>
 <div class="container">
-    <table class="table table-striped">
-        <tr><th>Id</th><th>Name</th><th>Rent</th><th>Description</th></tr>
+    <table class="table">
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Rent</th>
+            <th>Description</th>
+        </tr>
         @foreach (var housing in Model.Housings)
         {
             <tr>
