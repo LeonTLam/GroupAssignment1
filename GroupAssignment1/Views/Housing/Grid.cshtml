@@ -1,0 +1,25 @@
+﻿@model HousingListViewModel
+
+<!DOCTYPE html>
+<h1>List of Houses/Apartments (@Model.CurrentViewName View)</h1>
+<a href="/Housing/Table">Table View</a>
+<div class="container">
+    <div class="row row-cols-1 row-cols-md-3 g-4">
+        @foreach (var housing in Model.Housings)
+        {
+            <div class="col">
+                <div>
+                    <img src="@housing.ImageUrl" class="card-img-top" alt="@housing.Name">
+                    <div>
+                        <h5 class="text-start">
+                            @housing.Name
+                        </h5>
+                        <h5 class="text-nowrap">
+                            @housing.Rent.ToString("0.00 NOK")
+                        </h5>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>

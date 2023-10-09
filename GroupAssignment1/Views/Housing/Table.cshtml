@@ -1,18 +1,19 @@
-﻿@model IEnumerable<GroupAssignment1.Models.Housing>
+﻿@model HousingListViewModel
 
 <!DOCTYPE html>
 
+<h1>List of Houses/Apartments (@Model.CurrentViewName View)</h1>
+<a href="/Housing/Grid">Grid View</a>
 <div class="container">
-    <h1>@ViewBag.CurrentViewName</h1>
     <table class="table table-striped">
         <tr><th>Id</th><th>Name</th><th>Rent</th><th>Description</th></tr>
-        @foreach (var housing in Model)
+        @foreach (var housing in Model.Housings)
         {
             <tr>
                 <td>@housing.HousingId</td>
                 <td>@housing.Name</td>
                 <td>@housing.Rent.ToString("0.00 NOK")</td>
-                <td></td>
+                <td>@housing.Description</td>
             </tr>
         }
     </table>
