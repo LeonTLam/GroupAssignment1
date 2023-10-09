@@ -12,7 +12,9 @@
                     <img src="@housing.ImageUrl" class="card-img-top" alt="@housing.Name">
                     <div>
                         <h5 class="text-start">
-                            @housing.Name
+                            <a asp-controller="Housing"
+                               asp-action="Details"
+                               asp-route-id="@housing.HousingId">@housing.Name</a>
                         </h5>
                         <h5 class="text-nowrap">
                             @housing.Rent.ToString("0.00 NOK")
