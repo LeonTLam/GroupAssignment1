@@ -1,53 +1,35 @@
 ﻿@model HousingListViewModel
 
 <!DOCTYPE html>
-
-<style>
-
-    a {
-        color: hotpink;
-    }
-
-    a:hover {
-        color: royalblue;
-    }
-
-    a:link {
-        text-decoration: none;
-    }
-
-    img {
-        opacity: 0.5;
-    }
-
-    img:hover {
-        opacity: 1.0;
-    }
-
-</style>
-
-<h1>List of homes for rent (@Model.CurrentViewName View)</h1>
-<a href="/Housing/Table">Table View</a>
-<div class="container">
-    <div class="row row-cols-1 row-cols-md-3 g-4">
-        @foreach (var housing in Model.Housings)
-        {
-            <div class="col">
-                <div>
-                    <img src="@housing.ImageUrl" class="card-img-top" alt="@housing.Name">
-                    <div>
-                        <h5 class="text-start">
-                            <a asp-controller="Housing"
-                               asp-action="Details"
-                               asp-route-id="@housing.HousingId">@housing.Name</a>
-                        </h5>
-                        <h5 class="text-nowrap">
-                            @housing.Rent.ToString("0.00 NOK")
-                        </h5>
+<html>
+    <head>
+        <link rel="stylesheet" href="/css/grid.css" type="text/css" />
+    </head>
+    <body>
+        <h1>List of homes for rent (@Model.CurrentViewName View)</h1>
+        <a href="/Housing/Table">Table View</a>
+        <div class="container">
+            <div class="row row-cols-1 row-cols-md-3 g-4">
+                @foreach (var housing in Model.Housings)
+                {
+                    <div class="col">
+                        <div>
+                            <img src="@housing.ImageUrl" class="card-img-top" alt="@housing.Name">
+                            <div>
+                                <h5 class="text-start">
+                                    <a asp-controller="Housing"
+                                        asp-action="Details"
+                                        asp-route-id="@housing.HousingId">@housing.Name</a>
+                                </h5>
+                                <h5 class="text-nowrap">
+                                    @housing.Rent.ToString("0.00 NOK")
+                                </h5>
+                            </div>
+                        </div>
                     </div>
-                </div>
+                    /*<button class="button buttonChoose">Choose dates</button>*/
+                }
             </div>
-            /*<button class="button buttonChoose">Choose dates</button>*/
-        }
-    </div>
-</div>
+        </div>
+    </body>
+</html>
