@@ -45,9 +45,14 @@
         {
             <tr>
                 <td>@housing.HousingId</td>
-                <td>@housing.Name</td>
+                <td><a asp-controller="Housing"
+                    asp-action="Details"
+                    asp-route-id="@housing.HousingId">@housing.Name</a></td>
                 <td>@housing.Rent.ToString("0.00 NOK")</td>
                 <td>@housing.Description</td>
+                <td><a asp-controller="Housing"
+                    asp-action="Details"
+                    asp-route-id="@housing.HousingId" class="btn btn-outline-dark">See more</a></td>
             </tr>
         }
     </table>

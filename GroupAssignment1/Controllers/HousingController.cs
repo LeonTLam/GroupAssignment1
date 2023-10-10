@@ -24,8 +24,9 @@ namespace GroupAssignment1.Controllers
         {
             var housings = GetHousings();
             var housing = housings.FirstOrDefault(i => i.HousingId == id);
-            if (housing != null)
+            if (housing == null)
                 return NotFound();
+            
             return View(housing);
         }
 
