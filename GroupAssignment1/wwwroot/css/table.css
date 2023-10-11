@@ -2,12 +2,13 @@
 }
 
 
+
 a {
-    color: hotpink;
+    color: #0B0014;
 }
 
 a:hover {
-    color: royalblue;
+        color: #B6C2D9;
 }
 
  a:link {
@@ -17,12 +18,12 @@ a:hover {
 table {
     border-collapse: collapse;
     width: 100%;
+
 }
 
 th, td {
-    padding: 8px;
     text-align: left;
-    border-bottom: 1px solid #ddd;
+    
 }
 
 tr:hover {
