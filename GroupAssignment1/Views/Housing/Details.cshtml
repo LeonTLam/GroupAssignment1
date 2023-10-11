@@ -1,18 +1,15 @@
 ﻿@model Housing
-<!DOCTYPE html>
-<html>
-    <body>
-        <h3 class="my-5">
-            @Model.Name
-        </h3>
 
-        <div class="row gx-5">
-            <img alt="@Model.Name" src="@Model.ImageUrl" class="img-fluid col-5"/>
-            <div class="col-7">
-                <h5>@Model.Description</h5>
-                <h3 class="pull-right">@Model.Rent.ToString("0.00 NOK")</h3>
-                <p><a href="/Housing/Table">Go Back</a></p>
-            </div>
-        </div>
-    </body>
-</html>
+<h3 class="my-5">
+    @Model.Name
+</h3>
+
+<div class="row gx-5">
+    <img alt="@Model.Name" src="@Model.ImageUrl" class="img-fluid col-5"/>
+    <div class="col-7">
+        <h5>@Model.Description</h5>
+        <h3 class="pull-right">@Model.Rent.ToString("0.00 NOK")</h3>
+        <p><a href="/Housing/Table">Go Back</a></p>
+    </div>
+</div>
+>>>>>>> Stashed changes
