@@ -7,17 +7,17 @@
 
 <body>
     <h1>List of homes for rent (@Model.CurrentViewName View)</h1>
-    <a href="/Housing/Grid">Grid View</a>
+    <a href="/Housing/Grid">Grid View</a> 
     <div class="container">
         <table class="table">
             <tr>
-                
                 <th>Id</th>
                 <th>Name</th>
                 <th>Rent</th>
                 <th>Description</th>
-                
             </tr>
+                
+                
             @foreach (var housing in Model.Housings)
             {
                 <tr>
@@ -36,7 +36,7 @@
                            asp-route-id="@housing.HousingId" class="btn btn-outline-dark">See more</a>
                     </td>
                 </tr>
-                                }
+             }
         </table>
     </div>
 </body>
