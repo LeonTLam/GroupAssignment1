@@ -1,0 +1,17 @@
+﻿@model Housing
+
+<div class="col">
+    <div>
+        <img src="@Model.ImageUrl" class="card-img-top" alt="@Model.Name">
+        <div>
+            <h5 class="text-start">
+                <a asp-controller="Housing"
+                   asp-action="Details"
+                   asp-route-ID="@Model.HousingId">@Model.Name</a>
+            </h5>
+            <h5 class="text-nowrap">
+                @Model.Rent.ToString("0.00 NOK")
+            </h5>
+        </div>
+    </div>
+</div>

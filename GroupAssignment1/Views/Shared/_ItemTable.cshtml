@@ -1,0 +1,46 @@
+﻿@model IEnumerable<Housing>
+
+<div class="container">
+    <table class="table">
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Rent</th>
+            <th>Description</th>
+            <th>Image</th>
+            <th>Actions</th>
+        </tr>
+
+        @foreach (var housing in Model)
+        {
+            <tr>
+                <td>@housing.HousingId</td>
+
+                <td>
+                    <a asp-controller="Housing"
+                       asp-action="Details"
+                       asp-route-id="@housing.HousingId">@housing.Name</a>
+                </td>
+                <td>@housing.Rent.ToString("0.00 NOK")</td>
+                <td>@housing.Description</td>
+                <td>
+                    <img src="@housing.ImageUrl" alt="Item Image" style="max-width:80px; max-height: 80px;"/>
+                </td>
+                <td>
+                    <a asp-action="Update" asp-route-id="@housing.HousingId">Update</a>
+                    <a asp-action="Delete" asp-route-id="@housing.HousingId">Update</a>
+                </td>
+                <td>
+                    <a asp-controller="Housing"
+                       asp-action="Details"
+                       asp-route-id="@housing.HousingId" class="btn btn-outline-dark">See more</a>
+                </td>
+            </tr>
+        }
+    </table>
+    <p>
+        <a class="btn btn-secondary"
+            asp-controller="Housing"
+            asp-action="Create">Create new Housing</a>
+    </p>
+</div>

@@ -1,0 +1,29 @@
+﻿@model Housing
+
+<h2>Update current Listing</h2>
+
+<form asp-action="Update">
+    <input type="hidden" asp-for="HousingId" />
+    <div class="form-group">
+        <label asp-for="Name"></label>
+        <input asp-for="Name" class="form-control" />
+        <span asp-validation-for="Name" class="text-bg-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Rent"></label>
+        <input asp-for="Rent" class="form-control" />
+        <span asp-validation-for="Rent" class="text-bg-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Description"></label>
+        <input asp-for="Description" class="form-control" />
+        <span asp-validation-for="Description" class="text-bg-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="ImageUrl"></label>
+        <input asp-for="ImageUrl" class="form-control" />
+        <span asp-validation-for="ImageUrl" class="text-bg-danger"></span>
+    </div>
+    <button type="submit" class="btn btn-primary">Save Changes</button>
+    <a asp-action="Table" class="btn btn-secondary">Abort Changes</a>
+</form>

@@ -6,66 +6,99 @@ namespace GroupAssignment1.Controllers
 {
     public class HousingController : Controller
     {
+        private readonly HousingDbContext _housingDbContext;
+
+        public HousingController(HousingDbContext housingDbContext)
+        {
+            _housingDbContext = housingDbContext;
+        }
+
         public IActionResult Table()
         {
-            var housings = GetHousings();
+            List<Housing> housings = _housingDbContext.Housing.ToList();
             var housingListViewModel = new HousingListViewModel(housings, "Table");
             return View(housingListViewModel);
         }
 
         public IActionResult Grid()
         {
-            var housings = GetHousings();
+            List<Housing> housings = _housingDbContext.Housing.ToList();
             var housingListViewModel = new HousingListViewModel(housings, "Grid");
             return View(housingListViewModel);
         }
 
         public IActionResult Details(int id)
         {
-            var housings = GetHousings();
+            List<Housing> housings = _housingDbContext.Housing.ToList();
             var housing = housings.FirstOrDefault(i => i.HousingId == id);
             if (housing == null)
                 return NotFound();
-            
+
             return View(housing);
         }
 
-        public List<Housing> GetHousings()
+        [HttpGet]
+        public IActionResult Create()
         {
-            var housings = new List<Housing>();
-            var housing1 = new Housing
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult Create(Housing housing)
+        {
+            if (ModelState.IsValid)
             {
-                HousingId = 1,
-                Name = "Første",
-                Rent = 250.00,
-                Description = "Noe noe noe, huset noe noe noe, leie noe noe noe, lokasjon noe noe.",
-                ImageUrl = "/images/housing1.jpg"
+                _housingDbContext.Housing.Add(housing);
+                _housingDbContext.SaveChanges();
+                return RedirectToAction(nameof(Table));
+            }
+            return View(housing);
+        }
 
-            };
-            var housing2 = new Housing
+        [HttpGet]
+        public IActionResult Update(int id) 
+        {
+            var item = _housingDbContext.Housing.Find(id);
+            if (item == null)
             {
-                HousingId = 2,
-                Name = "Andre",
-                Rent = 300.00,
-                Description = "Noe noe noe, huset noe noe noe, leie noe noe noe, lokasjon noe noe.",
-                ImageUrl = "/images/housing1.jpg"
+                return NotFound();
+            }
+            return View(item);
+        }
 
-            };
-            var housing3 = new Housing
+        [HttpPost]
+        public IActionResult Update(Housing housing)
+        {
+            if (!ModelState.IsValid)
             {
-                HousingId = 3,
-                Name = "Tredje",
-                Rent = 450.00,
-                Description = "Noe noe noe, huset noe noe noe, leie noe noe noe, lokasjon noe noe.",
-                ImageUrl = "/images/housing1.jpg"
+                _housingDbContext.Housing.Update(housing);
+                _housingDbContext.SaveChanges();
+                return RedirectToAction(nameof(Table));
+            }
+            return View(housing);
+        }
 
-            };
+        [HttpGet]
+        public IActionResult Delete(int id)
+        {
+            var housing = _housingDbContext.Housing.Find(id);
+            if (housing == null)
+            {
+                return NotFound();
+            }
+            return View(housing);
+        }
 
-            housings.Add(housing1);
-            housings.Add(housing2);
-            housings.Add(housing3);
-
-            return housings;
+        [HttpPost]
+        public IActionResult DeleteConfirmed(int id)
+        {
+            var housing = _housingDbContext.Housing.Find(id);
+            if (housing == null) {
+                return NotFound();
+            }
+            _housingDbContext.Housing.Remove(housing);
+            _housingDbContext.SaveChanges();
+            return RedirectToAction(nameof(Table));
         }
     }
 }
