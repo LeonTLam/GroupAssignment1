@@ -15,8 +15,9 @@ public class Housing
     [Required]
     public string? ImageUrl { get; set; }
 
-    public int? OwnerId { get; set; }
-    public virtual Customer Owner { get; set; } = default!;
+    [ForeignKey("Customer")]
+    public int? CustomerId { get; set; }
+    public virtual Customer? Owner { get; set; } = default!;
 
     // Navigation property
     public virtual List<Order>? Orders { get; set; }

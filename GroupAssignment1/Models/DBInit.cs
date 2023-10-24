@@ -9,8 +9,19 @@ public static class DBInit
     {
         using var serviceScope = app.ApplicationServices.CreateScope();
         HousingDbContext context = serviceScope.ServiceProvider.GetRequiredService<HousingDbContext>();
-        // context.Database.EnsureDeleted();
+        context.Database.EnsureDeleted();
         context.Database.EnsureCreated();
+
+        if (!context.Customers.Any())
+        {
+            var customers = new List<Customer>
+            {
+                new Customer { FirstName = "Alice", LastName = "Hansen", Email = "Alice@gmail.com", Phone = "458 11 111"},
+                new Customer { FirstName = "Bob", LastName = "Johansen", Email = "Bob@Gmail.com", Phone = "458 22 222" },
+            };
+            context.AddRange(customers);
+            context.SaveChanges();
+        }
 
         if (!context.Housings.Any())
         {
@@ -21,7 +32,7 @@ public static class DBInit
                     Name = "Test1",
                     Rent = 250,
                     Description = "noenoenoeo" ,
-                    OwnerId = 1,
+                    CustomerId = 1,
                     ImageUrl = "https://images.pexels.com/photos/2581922/pexels-photo-2581922.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
 
                 },
@@ -30,7 +41,7 @@ public static class DBInit
                     Name = "Test2",
                     Rent = 500,
                     Description = "noenoenoeo",
-                    OwnerId = 2,
+                    CustomerId = 2,
                     ImageUrl = "https://images.pexels.com/photos/463734/pexels-photo-463734.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
                 },
                 new Housing
@@ -38,23 +49,12 @@ public static class DBInit
                     Name = "Test3",
                     Rent = 750,
                     Description = "noenoenoeo" ,
-                    OwnerId = 2,
+                    CustomerId = 2,
                     ImageUrl = "https://images.pexels.com/photos/2183521/pexels-photo-2183521.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
                 }
                 
             };
             context.AddRange(Housings);
-            context.SaveChanges();
-        }
-
-        if (!context.Customers.Any())
-        {
-            var customers = new List<Customer>
-            {
-                new Customer { FirstName = "Alice", LastName = "Hansen", Email = "Alice@gmail.com", Phone = "458 11 111"},
-                new Customer { FirstName = "Bob", LastName = "Johansen", Email = "Bob@Gmail.com", Phone = "458 22 222" },
-            };
-            context.AddRange(customers);
             context.SaveChanges();
         }
 

@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GroupAssignment1.Migrations
 {
     [DbContext(typeof(HousingDbContext))]
-    [Migration("20231024165551_RentalDbExpanded")]
+    [Migration("20231024183440_RentalDbExpanded")]
     partial class RentalDbExpanded
     {
         /// <inheritdoc />
@@ -57,6 +57,9 @@ namespace GroupAssignment1.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
+                    b.Property<int?>("CustomerId")
+                        .HasColumnType("INTEGER");
+
                     b.Property<string>("Description")
                         .IsRequired()
                         .HasColumnType("TEXT");
@@ -69,16 +72,12 @@ namespace GroupAssignment1.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.Property<int?>("OwnerId")
-                        .IsRequired()
-                        .HasColumnType("INTEGER");
-
                     b.Property<int>("Rent")
                         .HasColumnType("INTEGER");
 
                     b.HasKey("HousingId");
 
-                    b.HasIndex("OwnerId");
+                    b.HasIndex("CustomerId");
 
                     b.ToTable("Housings");
                 });
@@ -103,7 +102,7 @@ namespace GroupAssignment1.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.Property<decimal>("TotalPrice")
+                    b.Property<decimal?>("TotalPrice")
                         .HasColumnType("TEXT");
 
                     b.HasKey("OrderId");
@@ -119,9 +118,7 @@ namespace GroupAssignment1.Migrations
                 {
                     b.HasOne("GroupAssignment1.Models.Customer", "Owner")
                         .WithMany("OwnedHousings")
-                        .HasForeignKey("OwnerId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("CustomerId");
 
                     b.Navigation("Owner");
                 });
