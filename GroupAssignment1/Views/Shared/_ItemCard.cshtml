@@ -3,7 +3,8 @@
 <div class="col">
     <div>
         <img src="@Model.ImageUrl" class="card-img-top" alt="@Model.Name">
-        <div>
+        <div class="pt-2 row">
+            <div class="col">
             <h5 class="text-start">
                 <a asp-controller="Housing"
                    asp-action="Details"
@@ -12,6 +13,13 @@
             <h5 class="text-nowrap">
                 @Model.Rent.ToString("0.00 NOK")
             </h5>
+            </div>
+            <div class="col-3">
+                <a asp-action="Update" asp-route-id="@Model.HousingId" class="btn btn-outline-primary">Update</a>
+            </div>
+            <div class="col-3">
+                <a asp-action="Delete" asp-route-id="@Model.HousingId" class="btn btn-outline-danger">Delete</a>
+            </div>
         </div>
     </div>
 </div>

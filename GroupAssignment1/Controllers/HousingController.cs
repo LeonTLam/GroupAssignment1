@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using GroupAssignment1.Models;
 using GroupAssignment1.ViewModels;
 
@@ -13,24 +14,28 @@ namespace GroupAssignment1.Controllers
             _housingDbContext = housingDbContext;
         }
 
-        public IActionResult Table()
+        public List<Order> OrderConsole()
         {
-            List<Housing> housings = _housingDbContext.Housing.ToList();
+            return _housingDbContext.Orders.ToList();
+        }
+
+        public async Task<IActionResult> Table()
+        {
+            List<Housing> housings = await _housingDbContext.Housings.ToListAsync();
             var housingListViewModel = new HousingListViewModel(housings, "Table");
             return View(housingListViewModel);
         }
 
-        public IActionResult Grid()
+        public async Task<IActionResult> Grid()
         {
-            List<Housing> housings = _housingDbContext.Housing.ToList();
+            List<Housing> housings = await _housingDbContext.Housings.ToListAsync();
             var housingListViewModel = new HousingListViewModel(housings, "Grid");
             return View(housingListViewModel);
         }
 
-        public IActionResult Details(int id)
+        public async Task<IActionResult> Details(int id)
         {
-            List<Housing> housings = _housingDbContext.Housing.ToList();
-            var housing = housings.FirstOrDefault(i => i.HousingId == id);
+            var housing = await _housingDbContext.Housings.FirstOrDefaultAsync(i => i.HousingId == id);
             if (housing == null)
                 return NotFound();
 
@@ -44,21 +49,21 @@ namespace GroupAssignment1.Controllers
         }
 
         [HttpPost]
-        public IActionResult Create(Housing housing)
+        public async Task<IActionResult> Create(Housing housing)
         {
             if (ModelState.IsValid)
             {
-                _housingDbContext.Housing.Add(housing);
-                _housingDbContext.SaveChanges();
+                _housingDbContext.Housings.Add(housing);
+                await _housingDbContext.SaveChangesAsync();
                 return RedirectToAction(nameof(Table));
             }
             return View(housing);
         }
 
         [HttpGet]
-        public IActionResult Update(int id) 
+        public async Task<IActionResult> Update(int id) 
         {
-            var item = _housingDbContext.Housing.Find(id);
+            var item = await _housingDbContext.Housings.FindAsync(id);
             if (item == null)
             {
                 return NotFound();
@@ -67,21 +72,21 @@ namespace GroupAssignment1.Controllers
         }
 
         [HttpPost]
-        public IActionResult Update(Housing housing)
+        public async Task<IActionResult> Update(Housing housing)
         {
-            if (!ModelState.IsValid)
+            if (ModelState.IsValid)
             {
-                _housingDbContext.Housing.Update(housing);
-                _housingDbContext.SaveChanges();
+                _housingDbContext.Housings.Update(housing);
+                await _housingDbContext.SaveChangesAsync();
                 return RedirectToAction(nameof(Table));
             }
             return View(housing);
         }
 
         [HttpGet]
-        public IActionResult Delete(int id)
+        public async Task<IActionResult> Delete(int id)
         {
-            var housing = _housingDbContext.Housing.Find(id);
+            var housing = await _housingDbContext.Housings.FindAsync(id);
             if (housing == null)
             {
                 return NotFound();
@@ -90,14 +95,14 @@ namespace GroupAssignment1.Controllers
         }
 
         [HttpPost]
-        public IActionResult DeleteConfirmed(int id)
+        public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var housing = _housingDbContext.Housing.Find(id);
+            var housing = await _housingDbContext.Housings.FindAsync(id);
             if (housing == null) {
                 return NotFound();
             }
-            _housingDbContext.Housing.Remove(housing);
-            _housingDbContext.SaveChanges();
+            _housingDbContext.Housings.Remove(housing);
+            await _housingDbContext.SaveChangesAsync();
             return RedirectToAction(nameof(Table));
         }
     }

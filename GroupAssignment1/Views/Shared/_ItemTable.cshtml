@@ -27,8 +27,8 @@
                     <img src="@housing.ImageUrl" alt="Item Image" style="max-width:80px; max-height: 80px;"/>
                 </td>
                 <td>
-                    <a asp-action="Update" asp-route-id="@housing.HousingId">Update</a>
-                    <a asp-action="Delete" asp-route-id="@housing.HousingId">Update</a>
+                    <a asp-action="Update" asp-route-id="@housing.HousingId" class="btn btn-outline-primary">Update</a>
+                    <a asp-action="Delete" asp-route-id="@housing.HousingId" class="btn btn-outline-danger">Delete</a>
                 </td>
                 <td>
                     <a asp-controller="Housing"
