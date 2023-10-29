@@ -2,107 +2,149 @@
 using Microsoft.EntityFrameworkCore;
 using GroupAssignment1.Models;
 using GroupAssignment1.ViewModels;
+using GroupAssignment1.DAL;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc.Controllers;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
+using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace GroupAssignment1.Controllers
 {
     public class HousingController : Controller
     {
-        private readonly HousingDbContext _housingDbContext;
+        private readonly IHousingRepository _housingRepository;
+        private readonly ILogger<HousingController> _logger;
 
-        public HousingController(HousingDbContext housingDbContext)
+
+        public HousingController(IHousingRepository housingRepository, ILogger<HousingController> logger)
         {
-            _housingDbContext = housingDbContext;
+            _logger = logger;
+            _housingRepository = housingRepository;
         }
 
-        public List<Order> OrderConsole()
-        {
-            return _housingDbContext.Orders.ToList();
-        }
+
 
         public async Task<IActionResult> Table()
         {
-            List<Housing> housings = await _housingDbContext.Housings.ToListAsync();
+            var housings = await _housingRepository.GetAll();
+            if (housings == null)
+            {
+                _logger.LogError("[HousingController] Housing list not found while executing _HousingRepository.GetAll()");
+                return NotFound("Housing list not found");
+            }
             var housingListViewModel = new HousingListViewModel(housings, "Table");
             return View(housingListViewModel);
         }
 
         public async Task<IActionResult> Grid()
         {
-            List<Housing> housings = await _housingDbContext.Housings.ToListAsync();
+            var housings = await _housingRepository.GetAll();
+            if (housings == null)
+            {
+                _logger.LogError("[HousingController] Housing list not found while executing _HousingRepository.GetAll()");
+                return NotFound("Housing list not found");
+            }
             var housingListViewModel = new HousingListViewModel(housings, "Grid");
             return View(housingListViewModel);
         }
 
+       
+
         public async Task<IActionResult> Details(int id)
         {
-            var housing = await _housingDbContext.Housings.FirstOrDefaultAsync(i => i.HousingId == id);
+            var housing = await _housingRepository.GetHousingById(id);
             if (housing == null)
-                return NotFound();
-
+            {
+                _logger.LogError("[HousingController] Housing not found for the HousingId {HousingId:0000}", id);
+                return NotFound("Housing not found for the HousingId");
+            }
             return View(housing);
         }
 
         [HttpGet]
+        [Authorize]
         public IActionResult Create()
         {
             return View();
         }
 
         [HttpPost]
+        [Authorize]
         public async Task<IActionResult> Create(Housing housing)
         {
+
+            if (housing.StartDate >= housing.EndDate)
+            {
+                _logger.LogWarning("[HousingController] Housing creation failed {@housing}", housing);
+                return View(housing);
+            }
             if (ModelState.IsValid)
             {
-                _housingDbContext.Housings.Add(housing);
-                await _housingDbContext.SaveChangesAsync();
-                return RedirectToAction(nameof(Table));
+                bool returnOk = await _housingRepository.Create(housing);
+                if (returnOk)
+                {
+                    return RedirectToAction(nameof(Table));
+                }
             }
-            return View(housing);
+            _logger.LogWarning("[HousingController] Housing creation failed {@housing}", housing);
+                return View(housing);
         }
 
         [HttpGet]
+        [Authorize]
         public async Task<IActionResult> Update(int id) 
         {
-            var item = await _housingDbContext.Housings.FindAsync(id);
-            if (item == null)
+            var housing = await _housingRepository.GetHousingById(id);
+            if (housing == null)
             {
-                return NotFound();
+                _logger.LogError("[HousingController] Housing not found when updating the HousingId {HousingId:0000}", id);
+                return BadRequest("Housing not found for the HousingId");
             }
-            return View(item);
+            return View(housing);
         }
 
         [HttpPost]
+        [Authorize]
         public async Task<IActionResult> Update(Housing housing)
         {
+            if (housing.StartDate >= housing.EndDate)
+            {
+                _logger.LogWarning("[HousingController] Housing creation failed {@housing}", housing);
+                return View(housing);
+            }
             if (ModelState.IsValid)
             {
-                _housingDbContext.Housings.Update(housing);
-                await _housingDbContext.SaveChangesAsync();
-                return RedirectToAction(nameof(Table));
+                bool returnOk = await _housingRepository.Update(housing);
+                if (returnOk)
+                    return RedirectToAction(nameof(Table));
             }
+            _logger.LogWarning("[HousingController] Housing update failed {@housing}", housing);
             return View(housing);
         }
 
         [HttpGet]
+        [Authorize]
         public async Task<IActionResult> Delete(int id)
         {
-            var housing = await _housingDbContext.Housings.FindAsync(id);
+            var housing = await _housingRepository.GetHousingById(id);
             if (housing == null)
             {
-                return NotFound();
+                _logger.LogError("[HousingController] Housing not found for the HousingId {HousingId:0000}", id);
+                return BadRequest("Housing not found for the HousingId");
             }
             return View(housing);
         }
 
         [HttpPost]
+        [Authorize]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var housing = await _housingDbContext.Housings.FindAsync(id);
-            if (housing == null) {
-                return NotFound();
+            bool returnOk = await _housingRepository.Delete(id);
+            if (!returnOk)
+            {
+                _logger.LogError("[HousingController] Housing deletion failed for the HousingId {HousingId:0000}", id);
+                return BadRequest("Housing deletion failed");
             }
-            _housingDbContext.Housings.Remove(housing);
-            await _housingDbContext.SaveChangesAsync();
             return RedirectToAction(nameof(Table));
         }
     }

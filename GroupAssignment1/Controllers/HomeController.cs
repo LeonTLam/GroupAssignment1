@@ -2,20 +2,29 @@
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
+using GroupAssignment1.ViewModels;
+using GroupAssignment1.DAL;
+using Microsoft.Extensions.Hosting.Internal;
+
 namespace GroupAssignment1.Controllers
 {
     public class HomeController : Controller
     {
+        private readonly IHousingRepository _housingRepository;
         private readonly ILogger<HomeController> _logger;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger, IHousingRepository housingRepository)
         {
             _logger = logger;
+            _housingRepository = housingRepository;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View();
+            var allHousings = await _housingRepository.GetAll();
+            // You have the list of all housing objects in the allHousings variable
+
+            return View(allHousings);
         }
 
         public IActionResult Privacy()

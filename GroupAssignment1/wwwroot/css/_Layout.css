@@ -1,0 +1,31 @@
+﻿body {
+}
+
+.navbar-collapse.in {
+    display: block !important;
+}
+
+.navbar-brand {
+    margin-left: 50px;
+}
+
+.nav-item {
+    margin-left: 50px;
+}
+
+.navbar-toggler {
+    margin-right: 50px;
+}
+
+.footer {
+    position: fixed;
+    bottom: 0px;
+}
+
+.nav-footer {
+    color:white;
+}
+
+.nav-footer:hover {
+    color: #BADFE7;
+}

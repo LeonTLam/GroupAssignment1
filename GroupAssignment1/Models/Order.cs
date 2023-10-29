@@ -7,16 +7,27 @@ public class Order
 {
     [Key]
     public int OrderId { get; set; }
-
-    public string StartDate { get; set; } = string.Empty;
-    public string EndDate { get; set; } = string.Empty;
+    [Required]
+    [DataType(DataType.DateTime)]
+    public DateTime StartDate { get; set; }
+    [Required]
+    [DataType(DataType.DateTime)]
+    public DateTime EndDate { get; set; }
     public decimal? TotalPrice {  get; set; }
 
-    [ForeignKey("Customer")]
+    [ForeignKey("ApplicationUser")]
     public int CustomerId { get; set; }
-    public virtual Customer Customer { get; set; } = default!;
-
+    
     [ForeignKey("Housing")]
     public int HousingId { get; set; }
-    public virtual Housing Housing { get; set; } = default!;
+    
+    public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
+    {
+        if (EndDate >= StartDate)
+        {
+            yield return new ValidationResult(
+                $"EndDate must be larger than StartDate.",
+                new[] { nameof(StartDate) });
+        }
+    }
 }

@@ -1,0 +1,36 @@
+﻿@model OrderListViewModel
+
+    @foreach (var order in Model.Orders)
+{
+    <div style="border: 1px solid #ccc; padding:10px; margin-bottom: 20px;">
+        <div class="container">
+            <h5>Order @order.OrderId</h5>
+            <div>
+                <table class="table table-striped" style="max-width: 1200px;">
+                    <tr class="table-header">
+                        <th>Start Date</th>
+                        <th>End Date</th>
+                        <th>Total Price</th>
+                        <th>Customer Id</th>
+
+                        <th>Housing Id</th>
+                    </tr>
+                    <tr>
+                        <td>@order.StartDate</td>
+                        <td>@order.EndDate</td>
+                        <td>@order.TotalPrice</td>
+                        <td>@order.CustomerId</td>
+
+                        <td>@order.HousingId</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+}
+<p>
+    <a class="btn btn-secondary"
+    asp-controller="Order"
+    asp-action="CreateOrder"
+       asp-route-id="4">Create new Order</a>
+</p>

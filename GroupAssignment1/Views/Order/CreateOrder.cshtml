@@ -1,0 +1,35 @@
+﻿@using GroupAssignment1.ViewModels;
+@using GroupAssignment1.DAL;
+
+@model Order
+
+<h2>Create new Order</h2>
+@if (ViewData["Housing"] is Housing housing)
+{   <div asp-validation-summary="All" class="text-damger"></div>
+    <form asp-action="CreateOrder">
+        <div class="form-group">
+            <label asp-for="@Model.StartDate"></label><span class="text-danger">*</span>
+            <input type="date" min="@housing.StartDate.ToString("yyyy-MM-dd")" max="@housing.EndDate.ToString("yyyy-MM-dd")" asp-for="@Model.StartDate" value="@housing.StartDate.ToString("yyyy-MM-dd")" class="form-control" />
+            <span asp-validation-for="@Model.StartDate" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="@Model.EndDate"></label><span class="text-danger">*</span>
+            <input type="date" min="@housing.StartDate.ToString("yyyy-MM-dd")" max="@housing.EndDate.ToString("yyyy-MM-dd")" asp-for="@Model.EndDate" value="@housing.EndDate.ToString("yyyy-MM-dd")" class="form-control" />
+            <span asp-validation-for="@Model.EndDate" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="@Model.CustomerId"></label><span class="text-danger">*</span>
+            <input asp-for="@Model.CustomerId" class="form-control" value="1" />
+            <span asp-validation-for="@Model.CustomerId" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="@housing.HousingId" class="form-label"></label>
+            <input asp-for="@Model.HousingId" value="@housing.HousingId" class="form-control"/>
+            
+        </div>
+        <button type="submit" class="btn btn-primary">Create</button>
+        <a asp-action="Table" class="btn btn-secondary">Back to Order Table</a>
+    </form>
+}
+
+
