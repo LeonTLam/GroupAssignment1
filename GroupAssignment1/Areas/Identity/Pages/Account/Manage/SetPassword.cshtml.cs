@@ -5,10 +5,10 @@
 using System;
 using System.ComponentModel.DataAnnotations;
 using System.Threading.Tasks;
+using GroupAssignment1.Areas.Identity.Data;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using GroupAssignment1.Areas.Identity.Data;
 
 namespace GroupAssignment1.Areas.Identity.Pages.Account.Manage
 {

@@ -1,25 +1,37 @@
-﻿@model Housing
+﻿@model HousingListViewModel
 
-<div class="col">
-    <div>
-        <img src="@Model.ImageUrl" class="card-img-top" alt="@Model.Name">
-        <div class="pt-2 row">
-            <div class="col">
-            <h5 class="text-start">
-                <a asp-controller="Housing"
-                   asp-action="Details"
-                   asp-route-ID="@Model.HousingId">@Model.Name</a>
-            </h5>
-            <h5 class="text-nowrap">
-                @Model.Rent.ToString("0.00 NOK")
-            </h5>
-            </div>
-            <div class="col-3">
-                <a asp-action="Update" asp-route-id="@Model.HousingId" class="btn btn-outline-primary">Update</a>
-            </div>
-            <div class="col-3">
-                <a asp-action="Delete" asp-route-id="@Model.HousingId" class="btn btn-outline-danger">Delete</a>
+<div class="container">
+    <div class="row d-flex align-items-stretch">
+    @foreach (var housing in Model.Housings)
+    {
+        <div class="col-md-4 mb-3 d-flex justify-content-center">
+            <div class="card">
+                <a asp-controller="Housing" asp-action="Details" asp-route-id="@housing.HousingId">
+                    <img class="card-img-top" src="@housing.ImageUrl" alt="@housing.Name" style="max-height:232px"></a>
+                <div class="card-body">
+                    <h5 class="card-title">@housing.Name</h5>
+                    <h6 class="card-text">@housing.Location</h6>
+                    <p class="card-text">@housing.Description</p>
+                        <h6 class="card-text">@housing.StartDate.ToString("dd-MM-yyyy") - @housing.EndDate.ToString("dd-MM-yyyy")</h6>
+                    <h5 class="card-text">@housing.Rent.ToString("0 NOK/night")</h5>
+                </div>
+                <div class="card-footer text-center">
+                        <a asp-controller="Housing" asp-action="Details" asp-route-id="@housing.HousingId" class="btn-default-small">See more</a>
+
+                        @if (User.IsInRole("Admin"))
+                        {
+                            <a asp-action="Update" asp-route-id="@housing.HousingId" class="btn btn-outline-primary">Update</a>
+                            <a asp-action="Delete" asp-route-id="@housing.HousingId" class="btn btn-outline-danger">Delete</a>
+                        }
+                </div>
             </div>
         </div>
+    }
     </div>
+    @if (User.IsInRole("Admin"))
+    {
+        <a class="btn-dark-small"
+           asp-controller="Housing"
+           asp-action="Create">Create new Housing</a>
+    }
 </div>

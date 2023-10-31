@@ -53,7 +53,7 @@ namespace GroupAssignment1.Migrations
 
                     b.HasIndex("OrderId");
 
-                    b.ToTable("Customers");
+                    
                 });
 
             modelBuilder.Entity("GroupAssignment1.Models.Housing", b =>
@@ -321,13 +321,7 @@ namespace GroupAssignment1.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("GroupAssignment1.Models.Customer", b =>
-                {
-                    b.HasOne("GroupAssignment1.Models.Order", null)
-                        .WithMany("Customers")
-                        .HasForeignKey("OrderId");
-                });
-
+           
             modelBuilder.Entity("GroupAssignment1.Models.Housing", b =>
                 {
                     b.HasOne("GroupAssignment1.Models.Customer", "Owner")
@@ -425,7 +419,7 @@ namespace GroupAssignment1.Migrations
 
             modelBuilder.Entity("GroupAssignment1.Models.Order", b =>
                 {
-                    b.Navigation("Customers");
+                    
 
                     b.Navigation("Housings");
                 });

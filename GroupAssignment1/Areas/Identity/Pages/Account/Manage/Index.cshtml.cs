@@ -6,10 +6,10 @@ using System;
 using System.ComponentModel.DataAnnotations;
 using System.Text.Encodings.Web;
 using System.Threading.Tasks;
+using GroupAssignment1.Areas.Identity.Data;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using GroupAssignment1.Areas.Identity.Data;
 
 namespace GroupAssignment1.Areas.Identity.Pages.Account.Manage
 {
@@ -31,8 +31,6 @@ namespace GroupAssignment1.Areas.Identity.Pages.Account.Manage
         ///     directly from your code. This API may change or be removed in future releases.
         /// </summary>
         public string Username { get; set; }
-        public string FirstName { get; set; }
-        public string LastName { get; set; }
 
         /// <summary>
         ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
@@ -61,31 +59,17 @@ namespace GroupAssignment1.Areas.Identity.Pages.Account.Manage
             [Phone]
             [Display(Name = "Phone number")]
             public string PhoneNumber { get; set; }
-            [Required]
-            [StringLength(100, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 2)]
-            [Display(Name = "FirstName")]
-            public string FirstName { get; set; }
-
-            [Required]
-            [StringLength(100, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 2)]
-            [Display(Name = "LastName")]
-            public string LastName { get; set; }
         }
 
         private async Task LoadAsync(ApplicationUser user)
         {
             var userName = await _userManager.GetUserNameAsync(user);
-            var firstName = user.FirstName;
-            var lastName = user.LastName;
             var phoneNumber = await _userManager.GetPhoneNumberAsync(user);
 
             Username = userName;
 
             Input = new InputModel
             {
-                
-                FirstName = firstName,
-                LastName = lastName,
                 PhoneNumber = phoneNumber
             };
         }
@@ -115,17 +99,7 @@ namespace GroupAssignment1.Areas.Identity.Pages.Account.Manage
                 await LoadAsync(user);
                 return Page();
             }
-            if (Input.FirstName != null || Input.LastName != null)
-            {
-                user.FirstName = Input.FirstName;
-                user.LastName = Input.LastName;
-            } else
-            {
-                StatusMessage = "Unexpected error when setting Name";
-                return RedirectToPage();
-            }
-            
-            await _userManager.SetPhoneNumberAsync(user, Input.PhoneNumber);
+
             var phoneNumber = await _userManager.GetPhoneNumberAsync(user);
             if (Input.PhoneNumber != phoneNumber)
             {

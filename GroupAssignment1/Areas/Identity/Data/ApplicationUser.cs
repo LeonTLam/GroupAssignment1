@@ -16,7 +16,6 @@ public class ApplicationUser : IdentityUser
     
     public string LastName { get; set; } = string.Empty;
 
-    public virtual List<Housing>? Housings { get; set; }
     public virtual List<Order>? Orders { get; set; }
 }
     public class ApplicationRole : IdentityRole

@@ -1,6 +1,6 @@
 ﻿@model IEnumerable<Housing>
 
-<div class="container">
+<div class="container" style="padding-bottom:5vw;">
     <table class="table">
         <tr>
             <th>Id</th>
@@ -21,26 +21,31 @@
                        asp-action="Details"
                        asp-route-id="@housing.HousingId">@housing.Name</a>
                 </td>
-                <td>@housing.Rent.ToString("0.00 NOK")</td>
+                <td>@housing.Rent.ToString("0 NOK/night")</td>
                 <td>@housing.Description</td>
                 <td>
                     <img src="@housing.ImageUrl" alt="Item Image" style="max-width:80px; max-height: 80px;"/>
                 </td>
                 <td>
-                    <a asp-action="Update" asp-route-id="@housing.HousingId" class="btn btn-outline-primary">Update</a>
-                    <a asp-action="Delete" asp-route-id="@housing.HousingId" class="btn btn-outline-danger">Delete</a>
-                </td>
-                <td>
+                    @if (User.IsInRole("Admin"))
+                    {
+                        <a asp-action="Update" asp-route-id="@housing.HousingId" class="btn btn-outline-primary">Update</a>
+                        <a asp-action="Delete" asp-route-id="@housing.HousingId" class="btn btn-outline-danger">Delete</a>
+                    }
                     <a asp-controller="Housing"
                        asp-action="Details"
-                       asp-route-id="@housing.HousingId" class="btn btn-outline-dark">See more</a>
+                       asp-route-id="@housing.HousingId" class="btn-default-small">See more</a>
                 </td>
             </tr>
         }
     </table>
     <p>
-        <a class="btn btn-secondary"
-            asp-controller="Housing"
-            asp-action="Create">Create new Housing</a>
+        @if (User.IsInRole("Admin"))
+        {
+            <a class="btn-dark-small"
+               asp-controller="Housing"
+               asp-action="Create">Create new Housing</a>
+        }
+        
     </p>
 </div>

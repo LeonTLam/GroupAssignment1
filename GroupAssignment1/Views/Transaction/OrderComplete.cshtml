@@ -1,0 +1,57 @@
+﻿@{
+    ViewData["Title"] = "Your order is complete!";
+}
+@model Transaction
+
+<div class="text-center mt-4 mb-4">
+    <img src="/images/transaction/accept.png" style="height:50px;width:50px;"/>
+    <h1>@ViewData["Title"]</h1>
+</div>
+<div class="container text-center">
+    <h2>Your order number is<br /> @Model.OrderId<br />and your transaction id is @Model.TransactionId.</h2>
+    <p>Hope you enjoy your stay and have a nice trip!</p>
+    <hr class="featurette-divider mt-5 mb-5" />
+    <h1>Reminder</h1>
+    <div class="col-sm justify-content-center">
+        <div class="card">
+            <div class="card-body">
+                <div class="card-header">
+                    Check-in & Check-out
+                </div>
+                <p class="card-text">Get in contact with your host, make arrangments for both check-in and check-out.</p>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-body">
+                <div class="card-header">
+                    Key / Keyless instructions
+                </div>
+                <p class="card-text">Plan a solution for acquiring the key to the place beforehand.</p>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-body">
+                <div class="card-header">
+                    Leaving the place behind
+                </div>
+                <p class="card-text">Make sure to leave the place as instructed by the host.</p>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-body">
+                <div class="card-header">
+                    Belongings
+                </div>
+                <p class="card-text">Keep your belongings safe and do not forget about them!</p>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-body">
+                <div class="card-header">
+                    Enjoy!
+                </div>
+                <p class="card-text">Enjoy your stay and make sure to have fun!</p>
+            </div>
+        </div>
+    </div>
+</div>

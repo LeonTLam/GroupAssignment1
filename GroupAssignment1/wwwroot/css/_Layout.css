@@ -1,15 +1,19 @@
 ﻿body {
 }
 
-.navbar-collapse.in {
-    display: block !important;
+.navbar {
+    background-color: #2E4A56;
 }
 
-.navbar-brand {
-    margin-left: 50px;
+.navbar a, .navbar button{
+    color: white !important;
 }
 
-.nav-item {
+#toggler{
+    height:40px;
+}
+
+.navbar-brand, .nav-item {
     margin-left: 50px;
 }
 
@@ -29,3 +33,5 @@
 .nav-footer:hover {
     color: #BADFE7;
 }
+
+

@@ -1,0 +1,26 @@
+﻿@model List<GroupAssignment1.Models.Housing>
+@{
+    int count = 0;
+}
+
+<div class="row d-flex align-items-stretch ">
+    @foreach (var housing in Model)
+    {
+        if (count < 3)
+        {
+            <div class="col d-flex justify-content-center" align="center">
+                <div class="card" style="width: 18rem; margin-bottom:25px;">
+                    <img class="card-img-top" src="@housing.ImageUrl" style="max-height:190px;" alt="Card image cap">
+                    <div class="card-body">
+                        <h5 class="card-title">@housing.Name</h5>
+                        <p class="card-text">@housing.Description</p>
+                        <a asp-controller="Housing"
+                           asp-action="Details"
+                           asp-route-id="@housing.HousingId" class="btn-default-small">See more</a>
+                    </div>
+                </div>
+            </div>
+            count++;
+        }
+    }
+</div>

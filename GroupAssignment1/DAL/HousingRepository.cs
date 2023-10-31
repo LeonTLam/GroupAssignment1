@@ -23,7 +23,7 @@ namespace GroupAssignment1.DAL
             } 
             catch (Exception e) 
             {
-                _logger.LogError("[HousingRepository] housings ToListAsync() failed when GetAll(), error message: {e}", e.Message);
+                _logger.LogError("[HousingRepository] housings ToListAsync() failed when using GetAll(), error message: {e}", e.Message);
                 return null;
             }
             

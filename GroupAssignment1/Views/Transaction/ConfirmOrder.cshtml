@@ -1,0 +1,84 @@
+﻿@using GroupAssignment1.Areas.Identity.Data;
+@{
+    ViewData["Title"] = "Proceed with your Order";
+}
+@model Transaction
+
+<div class="text-center mt-4 mb-4">
+    <h1>@ViewData["Title"]</h1>
+</div>
+
+<link rel="stylesheet" href="/css/_Button.css" type="text/css" />
+
+
+@if (ViewData["Order"] is Order order && ViewData["User"] is ApplicationUser user)
+{
+    <div class="container">
+        <div class="col-sm">
+
+            <div asp-validation-summary="All" class="text-damger"></div>
+            <form asp-action="ConfirmOrder">
+                <div class="form-group mt-4 mb-4">
+                    <label asp-for="@Model.CustomerId" class="form-label"></label>
+                    <input asp-for="@Model.CustomerId" value="@order.CustomerId" readonly class="form-control form-control-lg" />
+                </div>
+                <div class="form-group mt-4 mb-4">
+                    <label asp-for="@order.StartDate" class="form-label></label>
+                    <input type="date" value="@order.StartDate.ToString("yyyy-MM-dd")" readonly class="form-control form-control-lg" />
+                    
+                </div>
+                <div class="form-group mt-4 mb-4">
+                    <label asp-for="@order.EndDate" class="form-label></label>
+                    <input type="date" value="@order.EndDate.ToString("yyyy-MM-dd")" readonly class="form-control form-control-lg" />
+                </div>
+                <div class="form-group mt-4 mb-4">
+                    <label asp-for="@Model.Amount" class="form-label"></label>
+                    <input asp-for="@Model.Amount" value="@order.TotalPrice" readonly class="form-control form-control-lg" />
+                </div>
+                <div class="form-group mt-4 mb-4">
+                    <label asp-for="@order.OrderId" class="form-label"></label>
+                    <input asp-for="@Model.OrderId" value="@order.OrderId" readonly class="form-control form-control-lg" />
+                </div>
+                <div class="form-group mt-4 mb-4">
+                    <label asp-for="@order.HousingId" class="form-label"></label>
+                    <input  value="@order.HousingId" readonly class="form-control form-control-lg" />
+                </div>
+                <div class="form-group mt-2 mb-2">
+                    <label asp-for="@user.Email"></label><span class="text-danger">*</span>
+                    <input value="@user.Email" readonly class="form-control form-control-lg" />
+                    <span asp-validation-for="@user.Email" class="text-danger"></span>
+                </div>
+                <div class="form-group mt-2 mb-2">
+                    <label asp-for="@user.FirstName"></label><span class="text-danger">*</span>
+                    <input value="@user.FirstName" readonly class="form-control form-control-lg" />
+                    
+                </div>
+                <div class="form-group mt-2 mb-2">
+                    <label asp-for="@user.LastName"></label><span class="text-danger">*</span>
+                    <input value="@user.LastName" readonly class="form-control form-control-lg" />
+                    
+                </div>
+                <div class="form-group mt-2 mb-2">
+                    <label asp-for="@user.PhoneNumber"></label><span class="text-danger">*</span>
+                    <input class="form-control form-control-lg" />
+                    
+                </div>
+                <div class="form-group mt-2 mb-2">
+                    <label>Card Number</label><span class="text-danger">*</span>
+                    <input class="form-control form-control-lg" />
+                </div>
+                <div class="form-group mt-2 mb-2">
+                    <label>Expiration date (MM/YY)</label><span class="text-danger">*</span>
+                    <input class="form-control form-control-lg" />
+                </div>
+                <div class="form-group mt-2 mb-2">
+                    <label>CVC</label><span class="text-danger">*</span>
+                    <input class="form-control form-control-lg" />
+                </div>
+                <button type="submit" class="btn-default-small">Confirm</button>
+                <a asp-controller="Order" asp-action="CreateOrder" asp-route-id="@order.HousingId" class="btn-dark-small">Back to Details</a>
+            </form>
+        </div>
+    </div>
+}
+

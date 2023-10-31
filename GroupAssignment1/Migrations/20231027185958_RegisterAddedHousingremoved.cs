@@ -38,13 +38,9 @@ namespace GroupAssignment1.Migrations
                 name: "Discriminator",
                 table: "AspNetUsers");
 
-            migrationBuilder.DropColumn(
-                name: "FirstName",
-                table: "AspNetUsers");
+            
 
-            migrationBuilder.DropColumn(
-                name: "LastName",
-                table: "AspNetUsers");
+            
         }
 
         /// <inheritdoc />
@@ -75,11 +71,7 @@ namespace GroupAssignment1.Migrations
                 type: "nvarchar(100)",
                 nullable: true);
 
-            migrationBuilder.AddColumn<string>(
-                name: "LastName",
-                table: "AspNetUsers",
-                type: "nvarchar(100)",
-                nullable: true);
+            
 
             migrationBuilder.CreateIndex(
                 name: "IX_Orders_HousingUserId",

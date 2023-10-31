@@ -1,12 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using GroupAssignment1.Models;
 using GroupAssignment1.ViewModels;
 using GroupAssignment1.DAL;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc.Controllers;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
-using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace GroupAssignment1.Controllers
 {
@@ -23,7 +19,7 @@ namespace GroupAssignment1.Controllers
         }
 
 
-
+        [Authorize(Roles = "Admin,User")]
         public async Task<IActionResult> Table()
         {
             var housings = await _housingRepository.GetAll();
@@ -36,6 +32,7 @@ namespace GroupAssignment1.Controllers
             return View(housingListViewModel);
         }
 
+        [Authorize(Roles = "Admin,User")]
         public async Task<IActionResult> Grid()
         {
             var housings = await _housingRepository.GetAll();
@@ -48,8 +45,8 @@ namespace GroupAssignment1.Controllers
             return View(housingListViewModel);
         }
 
-       
 
+        [Authorize(Roles = "Admin,User")]
         public async Task<IActionResult> Details(int id)
         {
             var housing = await _housingRepository.GetHousingById(id);
@@ -61,15 +58,15 @@ namespace GroupAssignment1.Controllers
             return View(housing);
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpGet]
-        [Authorize]
         public IActionResult Create()
         {
             return View();
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpPost]
-        [Authorize]
         public async Task<IActionResult> Create(Housing housing)
         {
 
@@ -80,6 +77,7 @@ namespace GroupAssignment1.Controllers
             }
             if (ModelState.IsValid)
             {
+                
                 bool returnOk = await _housingRepository.Create(housing);
                 if (returnOk)
                 {
@@ -90,8 +88,8 @@ namespace GroupAssignment1.Controllers
                 return View(housing);
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpGet]
-        [Authorize]
         public async Task<IActionResult> Update(int id) 
         {
             var housing = await _housingRepository.GetHousingById(id);
@@ -103,8 +101,8 @@ namespace GroupAssignment1.Controllers
             return View(housing);
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpPost]
-        [Authorize]
         public async Task<IActionResult> Update(Housing housing)
         {
             if (housing.StartDate >= housing.EndDate)
@@ -122,8 +120,8 @@ namespace GroupAssignment1.Controllers
             return View(housing);
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpGet]
-        [Authorize]
         public async Task<IActionResult> Delete(int id)
         {
             var housing = await _housingRepository.GetHousingById(id);
@@ -135,8 +133,8 @@ namespace GroupAssignment1.Controllers
             return View(housing);
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpPost]
-        [Authorize]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             bool returnOk = await _housingRepository.Delete(id);

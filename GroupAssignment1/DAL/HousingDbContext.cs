@@ -14,8 +14,9 @@ namespace GroupAssignment1.DAL
             //Database.EnsureCreated();
         }
         public DbSet<Housing> Housings { get; set; }
-        public DbSet<Customer> Customers { get; set; }
+        public DbSet<ApplicationUser> Customers { get; set; }
         public DbSet<Order> Orders { get; set; }
+        public DbSet<Transaction> Transactions { get; set; }
         
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

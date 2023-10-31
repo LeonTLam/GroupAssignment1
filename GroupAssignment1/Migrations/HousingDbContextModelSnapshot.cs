@@ -16,7 +16,7 @@ namespace GroupAssignment1.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "7.0.13")
+                .HasAnnotation("ProductVersion", "7.0.0")
                 .HasAnnotation("Proxies:ChangeTracking", false)
                 .HasAnnotation("Proxies:CheckEquality", false)
                 .HasAnnotation("Proxies:LazyLoading", true);
@@ -95,43 +95,10 @@ namespace GroupAssignment1.Migrations
                     b.ToTable("AspNetUsers", (string)null);
                 });
 
-            modelBuilder.Entity("GroupAssignment1.Models.Customer", b =>
-                {
-                    b.Property<int>("CustomerId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("Email")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("FirstName")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("LastName")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("Phone")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.HasKey("CustomerId");
-
-                    b.ToTable("Customers");
-                });
-
             modelBuilder.Entity("GroupAssignment1.Models.Housing", b =>
                 {
                     b.Property<int>("HousingId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("ApplicationUserId")
-                        .HasColumnType("TEXT");
-
-                    b.Property<int?>("CustomerId")
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("Description")
@@ -143,6 +110,14 @@ namespace GroupAssignment1.Migrations
                         .HasColumnType("TEXT");
 
                     b.Property<string>("ImageUrl")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Including")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Location")
                         .IsRequired()
                         .HasColumnType("TEXT");
 
@@ -158,10 +133,6 @@ namespace GroupAssignment1.Migrations
 
                     b.HasKey("HousingId");
 
-                    b.HasIndex("ApplicationUserId");
-
-                    b.HasIndex("CustomerId");
-
                     b.ToTable("Housings");
                 });
 
@@ -174,8 +145,8 @@ namespace GroupAssignment1.Migrations
                     b.Property<string>("ApplicationUserId")
                         .HasColumnType("TEXT");
 
-                    b.Property<int>("CustomerId")
-                        .HasColumnType("INTEGER");
+                    b.Property<string>("CustomerId")
+                        .HasColumnType("TEXT");
 
                     b.Property<DateTime>("EndDate")
                         .HasColumnType("TEXT");
@@ -193,11 +164,32 @@ namespace GroupAssignment1.Migrations
 
                     b.HasIndex("ApplicationUserId");
 
-                    b.HasIndex("CustomerId");
-
                     b.HasIndex("HousingId");
 
                     b.ToTable("Orders");
+                });
+
+            modelBuilder.Entity("GroupAssignment1.Models.Transaction", b =>
+                {
+                    b.Property<int>("TransactionId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<decimal>("Amount")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("CustomerId")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("OrderId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("TransactionDate")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("TransactionId");
+
+                    b.ToTable("Transactions");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -332,30 +324,11 @@ namespace GroupAssignment1.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("GroupAssignment1.Models.Housing", b =>
-                {
-                    b.HasOne("GroupAssignment1.Areas.Identity.Data.ApplicationUser", null)
-                        .WithMany("Housings")
-                        .HasForeignKey("ApplicationUserId");
-
-                    b.HasOne("GroupAssignment1.Models.Customer", "Owner")
-                        .WithMany("OwnedHousings")
-                        .HasForeignKey("CustomerId");
-
-                    b.Navigation("Owner");
-                });
-
             modelBuilder.Entity("GroupAssignment1.Models.Order", b =>
                 {
                     b.HasOne("GroupAssignment1.Areas.Identity.Data.ApplicationUser", null)
                         .WithMany("Orders")
                         .HasForeignKey("ApplicationUserId");
-
-                    b.HasOne("GroupAssignment1.Models.Customer", null)
-                        .WithMany("Orders")
-                        .HasForeignKey("CustomerId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
 
                     b.HasOne("GroupAssignment1.Models.Housing", null)
                         .WithMany("Orders")
@@ -417,16 +390,7 @@ namespace GroupAssignment1.Migrations
 
             modelBuilder.Entity("GroupAssignment1.Areas.Identity.Data.ApplicationUser", b =>
                 {
-                    b.Navigation("Housings");
-
                     b.Navigation("Orders");
-                });
-
-            modelBuilder.Entity("GroupAssignment1.Models.Customer", b =>
-                {
-                    b.Navigation("Orders");
-
-                    b.Navigation("OwnedHousings");
                 });
 
             modelBuilder.Entity("GroupAssignment1.Models.Housing", b =>

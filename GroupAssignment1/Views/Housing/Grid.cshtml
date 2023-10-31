@@ -1,18 +1,15 @@
-﻿@model HousingListViewModel
-
-
+﻿@{
+    ViewData["Title"] = "Housing Grid";
+}
+@model HousingListViewModel
 
 <link rel="stylesheet" href="/css/grid.css" type="text/css" />
+<link rel="stylesheet" href="~/css/_Button.css" type="text/css"/>
 
-
-<h1>List of homes for rent (@Model.CurrentViewName View)</h1>
-<a href="/Housing/Table">Table View</a>
-<div class="container">
-    <div class="row row-cols-1 row-cols-md-3 g-4">
-        @foreach (var housing in Model.Housings)
-        {
-            <partial name="_HousingCard" model="housing" />
-            /*<button class="button buttonChoose">Choose dates</button>*/
-        }
-    </div>
+<div class="text-center">
+    <h1>List of homes for rent (@Model.CurrentViewName View)</h1>
+    <a href="/Housing/Table">Table View<br /><img src="~/images/housing/Grid_Table.jpg" href="/Housing/Table" style="width:125px;height:65px;" /></a>
 </div>
+
+ <partial name="_HousingCard" />
+

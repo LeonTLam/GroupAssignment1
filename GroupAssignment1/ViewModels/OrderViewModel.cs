@@ -1,12 +1,13 @@
-﻿using GroupAssignment1.Models;
+﻿using GroupAssignment1.Areas.Identity.Data;
+using GroupAssignment1.Models;
 
 namespace GroupAssignment1.ViewModels
 {
     public class OrderViewModel
     {
-        public IEnumerable<Customer> Customers { get; set; }
-        public IEnumerable<Housing> Housings { get; set; }
-        public Housing housing { get; set; }
-        public Order order { get; set; }
+        public IEnumerable<ApplicationUser>? Customers { get; set; }
+        public IEnumerable<Housing>? Housings { get; set; }
+        public Housing? housing { get; set; }
+        public Order? order { get; set; }
     }
 }

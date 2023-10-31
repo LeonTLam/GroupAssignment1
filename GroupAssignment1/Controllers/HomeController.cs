@@ -5,6 +5,7 @@ using System.Diagnostics;
 using GroupAssignment1.ViewModels;
 using GroupAssignment1.DAL;
 using Microsoft.Extensions.Hosting.Internal;
+using Microsoft.AspNetCore.Authorization;
 
 namespace GroupAssignment1.Controllers
 {
@@ -27,6 +28,7 @@ namespace GroupAssignment1.Controllers
             return View(allHousings);
         }
 
+        [Authorize(Roles = "Admin")]
         public IActionResult Privacy()
         {
             return View();

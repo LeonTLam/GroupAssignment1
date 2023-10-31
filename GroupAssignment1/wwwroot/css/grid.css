@@ -2,21 +2,31 @@
 }
 
 a {
-    color: hotpink;
+    color: #6Fb3B8;
 }
 
-a:hover {
-    color: royalblue;
-}
+    a:hover {
+        color: #2E4A56;
+    }
 
 a:link {
     text-decoration: none;
-    }
+}
 
 img {
-    opacity: 0.5;
+    opacity: 0.7;
 }
 
 img:hover {
     opacity: 1.0;
+}
+
+h1 {
+    font-size: 26px;
+    margin: 20px 0;
+    
+}
+
+.card {
+    border-color: #6Fb3B8;
 }

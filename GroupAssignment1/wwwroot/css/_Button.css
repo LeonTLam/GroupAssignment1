@@ -1,0 +1,106 @@
+﻿.btn-default {
+    transition-duration: 0.4s;
+    background-color: white;
+    color: black;
+    padding: 15px 32px;
+    border: 4px solid #6Fb3B8;
+    border-radius: 8px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+}
+
+    .btn-default:hover {
+        background-color: #6Fb3B8;
+        color: white;
+    }
+
+.btn-default-small {
+    transition-duration: 0.4s;
+    background-color: white;
+    color: black;
+    padding: 10px 22px;
+    border: 4px solid #6Fb3B8;
+    border-radius: 8px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+}
+
+    .btn-default-small:hover {
+        background-color: #6Fb3B8;
+        color: white;
+    }
+
+.btn-dark {
+    transition-duration: 0.4s;
+    background-color: white;
+    color: black;
+    padding: 15px 32px;
+    border: 4px solid #2E4A56;
+    border-radius: 8px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+}
+
+    .btn-dark:hover {
+        background-color: #2E4A56;
+        color: white;
+    }
+
+.btn-dark-small {
+    transition-duration: 0.4s;
+    background-color: white;
+    color: black;
+    padding: 10px 22px;
+    border: 4px solid #2E4A56;
+    border-radius: 8px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+}
+    .btn-dark-small:hover {
+        background-color: #2E4A56;
+        color: white;
+    }
+
+.btn-default-smaller {
+    transition-duration: 0.4s;
+    background-color: white;
+    color: black;
+    padding: 7px 15px;
+    border: 4px solid #6Fb3B8;
+    border-radius: 8px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+}
+
+    .btn-default-smaller:hover {
+        background-color: #6Fb3B8;
+        color: white;
+    }
+
+.btn-dark-smaller {
+    transition-duration: 0.4s;
+    background-color: white;
+    color: black;
+    padding: 7px 15px;
+    border: 4px solid #2E4A56;
+    border-radius: 8px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+}
+
+    .btn-dark-smaller:hover {
+        background-color: #2E4A56;
+        color: white;
+    }

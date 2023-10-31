@@ -1,0 +1,12 @@
+﻿@{
+    ViewData["Title"] = "List of Orders";
+}
+@model OrderListViewModel
+<div class="text-center mt-4 mb-4">
+    <h1>@ViewData["Title"]</h1>
+</div>
+
+<div class="container mt-4 mb-4">
+    <partial name="_OrderTable" model="Model" />
+</div>
+

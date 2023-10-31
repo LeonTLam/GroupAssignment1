@@ -1,0 +1,33 @@
+﻿@using GroupAssignment1.Areas.Identity.Data;
+@model IEnumerable<ApplicationUser>
+
+<div class="container">
+    <table class="table table-striped">
+        <tr>
+            <th>Id</th>
+            <th>FName</th>
+            <th>LName</th>
+            <th>Email</th>
+            <th>Phone</th>
+            <th>Orders</th>
+            <th>Actions</th>
+        </tr>
+        @foreach (var customer in Model)
+        {
+        <tr>
+            <td>@customer.Id</td>
+            <td>@customer.FirstName</td>
+            <td>@customer.LastName</td>
+            <td>@customer.Email</td>
+            <td>@customer.PhoneNumber</td>
+            <td>
+                @if (customer.Orders != null)
+                {
+                    <p>@string.Join(", ", customer.Orders.Select(order => $"Order{order.OrderId}"))</p>
+                }
+            </td>
+            <td></td>
+        </tr>
+        }
+    </table>
+</div>

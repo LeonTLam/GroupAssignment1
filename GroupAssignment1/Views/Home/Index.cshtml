@@ -1,47 +1,21 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
-    int count = 0;
+    ViewData["Title"] = "LAMRentals";
 }
 
-@model List<GroupAssignment1.Models.Housing>
+<link rel="stylesheet" href="/css/index.css" type="text/css" />
+<link rel="stylesheet" href="/css/_Button.css" type="text/css" />
 
-<head>
-    <link rel="stylesheet" href="/css/index.css" type="text/css" />
-</head>
-
-<body>
-    <div class="jumbotron ">
-        <div class="d-flex justify-content-center align-items-center" id="background">
-            <div>
-                <h1 class="display-4">LAMRentals</h1>
-                <h3>Rent your dream home, for now or for later.</h3><br />
-                <a asp-controller="Housing" asp-action="Table" type="button" class="button1" id="button">Get Started</a>
-            </div>
+<div class="jumbotron ">
+    <div class="d-flex justify-content-center align-items-center" id="background">
+        <div>
+            <h1 class="display-4">@ViewData["Title"]</h1>
+            <h3>Rent your dream home, for now or for later.</h3><br />
+            <a asp-controller="Housing" asp-action="Table" type="button" class="button1" id="button">Get Started</a>
         </div>
     </div>
-    <div class="container-fluid">
-        <div class="row justify-content-center">
-             @foreach (var housing in Model)
-            {
-                if (count < 3) 
-                {
-                <div class="col" align="center">
-                    <div class="card" style="width: 18rem; margin-bottom:25px;">
-                        <img class="card-img-top" src="@housing.ImageUrl" style="max-height:190px;" alt="Card image cap">
-                    <div class="card-body">
-                        <h5 class="card-title">@housing.Name</h5>
-                        <p class="card-text">@housing.Description</p>
-                        <a asp-controller="Housing"
-                       asp-action="Details"
-                                   asp-route-id="@housing.HousingId" class="button1">See more</a>
-                    </div>
-                </div>
-                </div>
-                count++;
-                }
-            }
-            
-        </div>
-    </div>
-</body>
+</div>
+<div class="container-fluid">
+    <partial name="_HomeCard" />
+</div>
+
 

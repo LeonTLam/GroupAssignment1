@@ -16,7 +16,7 @@ public class Order
     public decimal? TotalPrice {  get; set; }
 
     [ForeignKey("ApplicationUser")]
-    public int CustomerId { get; set; }
+    public string? CustomerId { get; set; }
     
     [ForeignKey("Housing")]
     public int HousingId { get; set; }

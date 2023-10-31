@@ -1,8 +1,10 @@
 ﻿@model OrderListViewModel
 
-    @foreach (var order in Model.Orders)
+<link rel="stylesheet" href="/css/_Button.css" type="text/css" />
+
+@foreach (var order in Model.Orders)
 {
-    <div style="border: 1px solid #ccc; padding:10px; margin-bottom: 20px;">
+    <div style="border: 1px solid #2E4A56; padding:10px; margin-bottom: 20px;">
         <div class="container">
             <h5>Order @order.OrderId</h5>
             <div>
@@ -16,8 +18,8 @@
                         <th>Housing Id</th>
                     </tr>
                     <tr>
-                        <td>@order.StartDate</td>
-                        <td>@order.EndDate</td>
+                        <td>@order.StartDate.ToString("dd-MM-yyyy")</td>
+                        <td>@order.EndDate.ToString("dd-MM-yyyy")</td>
                         <td>@order.TotalPrice</td>
                         <td>@order.CustomerId</td>
 
@@ -28,9 +30,12 @@
         </div>
     </div>
 }
-<p>
-    <a class="btn btn-secondary"
-    asp-controller="Order"
-    asp-action="CreateOrder"
-       asp-route-id="4">Create new Order</a>
-</p>
+@if (User.IsInRole("Admin"))
+{
+    <p>
+        <a class="btn-default-small"
+           asp-controller="Order"
+           asp-action="CreateOrder"
+           asp-route-id="4">Create new Order</a>
+    </p>
+}

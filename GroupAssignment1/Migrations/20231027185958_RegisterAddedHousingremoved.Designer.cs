@@ -24,37 +24,9 @@ namespace GroupAssignment1.Migrations
                 .HasAnnotation("Proxies:CheckEquality", false)
                 .HasAnnotation("Proxies:LazyLoading", true);
 
-            modelBuilder.Entity("GroupAssignment1.Models.Customer", b =>
-                {
-                    b.Property<int>("CustomerId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("Email")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("FirstName")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("LastName")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.Property<int?>("OrderId")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("Phone")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.HasKey("CustomerId");
-
-                    b.HasIndex("OrderId");
-
-                    b.ToTable("Customers");
-                });
+            
+                    
+             
 
             modelBuilder.Entity("GroupAssignment1.Models.Housing", b =>
                 {
@@ -321,18 +293,10 @@ namespace GroupAssignment1.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("GroupAssignment1.Models.Customer", b =>
-                {
-                    b.HasOne("GroupAssignment1.Models.Order", null)
-                        .WithMany("Customers")
-                        .HasForeignKey("OrderId");
-                });
 
             modelBuilder.Entity("GroupAssignment1.Models.Housing", b =>
                 {
-                    b.HasOne("GroupAssignment1.Models.Customer", "Owner")
-                        .WithMany("OwnedHousings")
-                        .HasForeignKey("CustomerId");
+                    
 
                     b.HasOne("GroupAssignment1.Models.Order", null)
                         .WithMany("Housings")
@@ -343,11 +307,7 @@ namespace GroupAssignment1.Migrations
 
             modelBuilder.Entity("GroupAssignment1.Models.Order", b =>
                 {
-                    b.HasOne("GroupAssignment1.Models.Customer", "Customer")
-                        .WithMany("Orders")
-                        .HasForeignKey("CustomerId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                     
 
                     b.HasOne("GroupAssignment1.Models.Housing", "Housing")
                         .WithMany("Orders")
@@ -355,8 +315,7 @@ namespace GroupAssignment1.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Customer");
-
+                    
                     b.Navigation("Housing");
                 });
 
@@ -411,12 +370,7 @@ namespace GroupAssignment1.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("GroupAssignment1.Models.Customer", b =>
-                {
-                    b.Navigation("Orders");
-
-                    b.Navigation("OwnedHousings");
-                });
+            
 
             modelBuilder.Entity("GroupAssignment1.Models.Housing", b =>
                 {
@@ -425,7 +379,7 @@ namespace GroupAssignment1.Migrations
 
             modelBuilder.Entity("GroupAssignment1.Models.Order", b =>
                 {
-                    b.Navigation("Customers");
+                    
 
                     b.Navigation("Housings");
                 });

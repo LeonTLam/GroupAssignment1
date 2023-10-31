@@ -8,27 +8,26 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="6.0.24" />
-    <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="6.0.23" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="6.0.6" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="6.0.23" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="7.0.12">
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="7.0.0">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Proxies" Version="7.0.12" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="7.0.12" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="7.0.13" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="6.0.23">
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Proxies" Version="7.0.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="7.0.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="7.0.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="7.0.0">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="6.0.16" />
-    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
-    <PackageReference Include="PayPal" Version="1.9.1" />
     <PackageReference Include="Serilog.Extensions.Logging.File" Version="3.0.0" />
   </ItemGroup>
 
   <ItemGroup>
     <Folder Include="Logs\" />
+    <Folder Include="Views\About\" />
   </ItemGroup>
 
 </Project>
