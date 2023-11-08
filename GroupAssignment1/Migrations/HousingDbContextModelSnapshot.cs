@@ -164,7 +164,8 @@ namespace GroupAssignment1.Migrations
 
                     b.HasIndex("ApplicationUserId");
 
-                    b.HasIndex("HousingId");
+                    b.HasIndex("HousingId")
+                        .IsUnique();
 
                     b.ToTable("Orders");
                 });
@@ -330,11 +331,13 @@ namespace GroupAssignment1.Migrations
                         .WithMany("Orders")
                         .HasForeignKey("ApplicationUserId");
 
-                    b.HasOne("GroupAssignment1.Models.Housing", null)
-                        .WithMany("Orders")
-                        .HasForeignKey("HousingId")
+                    b.HasOne("GroupAssignment1.Models.Housing", "Housing")
+                        .WithOne("Order")
+                        .HasForeignKey("GroupAssignment1.Models.Order", "HousingId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Housing");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -395,7 +398,7 @@ namespace GroupAssignment1.Migrations
 
             modelBuilder.Entity("GroupAssignment1.Models.Housing", b =>
                 {
-                    b.Navigation("Orders");
+                    b.Navigation("Order");
                 });
 #pragma warning restore 612, 618
         }

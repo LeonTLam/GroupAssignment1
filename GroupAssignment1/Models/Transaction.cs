@@ -17,5 +17,7 @@ namespace GroupAssignment1.Models
 
         [ForeignKey("Order")]
         public int OrderId { get; set; }
+
+        
     }
 }

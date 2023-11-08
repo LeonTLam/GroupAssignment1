@@ -20,7 +20,9 @@ public class Order
     
     [ForeignKey("Housing")]
     public int HousingId { get; set; }
-    
+
+    public virtual Housing? Housing { get; set; }
+
     public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
     {
         if (EndDate >= StartDate)

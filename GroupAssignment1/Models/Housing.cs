@@ -29,7 +29,7 @@ public class Housing
     public String? Including {  get; set; }
 
     // Navigation property
-    public virtual List<Order>? Orders { get; set; }
+    public virtual Order? Order { get; set; }
 
     public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
     {

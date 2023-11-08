@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GroupAssignment1.Migrations
 {
     [DbContext(typeof(HousingDbContext))]
-    [Migration("20231031094457_Customers")]
-    partial class Customers
+    [Migration("20231107151317_ResetDatabase")]
+    partial class ResetDatabase
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -134,7 +134,12 @@ namespace GroupAssignment1.Migrations
                     b.Property<DateTime>("StartDate")
                         .HasColumnType("TEXT");
 
+                    b.Property<int?>("TransactionId")
+                        .HasColumnType("INTEGER");
+
                     b.HasKey("HousingId");
+
+                    b.HasIndex("TransactionId");
 
                     b.ToTable("Housings");
                 });
@@ -163,11 +168,17 @@ namespace GroupAssignment1.Migrations
                     b.Property<decimal?>("TotalPrice")
                         .HasColumnType("TEXT");
 
+                    b.Property<int?>("TransactionId")
+                        .HasColumnType("INTEGER");
+
                     b.HasKey("OrderId");
 
                     b.HasIndex("ApplicationUserId");
 
-                    b.HasIndex("HousingId");
+                    b.HasIndex("HousingId")
+                        .IsUnique();
+
+                    b.HasIndex("TransactionId");
 
                     b.ToTable("Orders");
                 });
@@ -327,17 +338,30 @@ namespace GroupAssignment1.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
+            modelBuilder.Entity("GroupAssignment1.Models.Housing", b =>
+                {
+                    b.HasOne("GroupAssignment1.Models.Transaction", null)
+                        .WithMany("Housings")
+                        .HasForeignKey("TransactionId");
+                });
+
             modelBuilder.Entity("GroupAssignment1.Models.Order", b =>
                 {
                     b.HasOne("GroupAssignment1.Areas.Identity.Data.ApplicationUser", null)
                         .WithMany("Orders")
                         .HasForeignKey("ApplicationUserId");
 
-                    b.HasOne("GroupAssignment1.Models.Housing", null)
-                        .WithMany("Orders")
-                        .HasForeignKey("HousingId")
+                    b.HasOne("GroupAssignment1.Models.Housing", "Housing")
+                        .WithOne("Order")
+                        .HasForeignKey("GroupAssignment1.Models.Order", "HousingId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.HasOne("GroupAssignment1.Models.Transaction", null)
+                        .WithMany("Orders")
+                        .HasForeignKey("TransactionId");
+
+                    b.Navigation("Housing");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -398,6 +422,13 @@ namespace GroupAssignment1.Migrations
 
             modelBuilder.Entity("GroupAssignment1.Models.Housing", b =>
                 {
+                    b.Navigation("Order");
+                });
+
+            modelBuilder.Entity("GroupAssignment1.Models.Transaction", b =>
+                {
+                    b.Navigation("Housings");
+
                     b.Navigation("Orders");
                 });
 #pragma warning restore 612, 618
